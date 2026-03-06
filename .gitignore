@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+# Node / TypeScript
+node_modules/
+dist/
+*.js.map
+
+# Private data files — do NOT commit these
+plugins/kwatch/campaigns.json
+plugins/trader/Data/
+plugins/trader/Research/
+plugins/trader/Schwab/
+plugins/trader/Massive/
+plugins/trader/refresh_journal.py
+plugins/seo/SITES.md
+
+# Credentials (never commit)
+.env
+.env.local
+*.credentials
+*-credentials
+*_credentials
+*.key
+*.pem
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor
+.idea/
+.vscode/
+*.swp

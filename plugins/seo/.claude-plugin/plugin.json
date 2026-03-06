@@ -1,0 +1,13 @@
+{
+  "name": "seo",
+  "description": "Comprehensive SEO and GEO (Generative Engine Optimization) skill using DataForSEO API. Keyword research, content strategy, technical audits, schema markup, E-E-A-T, and competitive analysis.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Adam Levoy",
+    "email": "ajlevoy@gmail.com"
+  },
+  "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/seo",
+  "repository": "https://github.com/adamlevoy/claude-plugins",
+  "license": "MIT",
+  "keywords": ["seo", "geo", "dataforseo", "keyword-research", "content-strategy", "technical-seo"]
+}

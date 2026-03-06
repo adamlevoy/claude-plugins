@@ -1,0 +1,13 @@
+{
+  "name": "sync-claude-sessions",
+  "description": "Sync Claude Code sessions to Obsidian markdown. Export, resume, add notes, close sessions, and archive conversation history.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Adam Levoy",
+    "email": "ajlevoy@gmail.com"
+  },
+  "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/sync-claude-sessions",
+  "repository": "https://github.com/adamlevoy/claude-plugins",
+  "license": "MIT",
+  "keywords": ["claude-code", "sessions", "obsidian", "export", "notes", "history"]
+}

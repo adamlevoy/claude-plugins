@@ -1,0 +1,13 @@
+{
+  "name": "firecrawl",
+  "description": "Web scraping and crawling via Firecrawl API. Scrape websites, crawl for markdown, build knowledge bases, extract structured data, map URLs, and search the web.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Adam Levoy",
+    "email": "ajlevoy@gmail.com"
+  },
+  "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/firecrawl",
+  "repository": "https://github.com/adamlevoy/claude-plugins",
+  "license": "MIT",
+  "keywords": ["firecrawl", "scraping", "crawling", "web-data", "knowledge-base", "markdown"]
+}

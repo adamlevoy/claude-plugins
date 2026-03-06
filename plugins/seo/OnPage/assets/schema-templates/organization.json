@@ -1,0 +1,29 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "REPLACE: Organization Name",
+  "url": "REPLACE: https://example.com",
+  "logo": "REPLACE: https://example.com/logo.png",
+  "description": "REPLACE: Brief description of the organization",
+  "foundingDate": "REPLACE: 2020-01-01",
+  "sameAs": [
+    "REPLACE: https://twitter.com/org",
+    "REPLACE: https://linkedin.com/company/org",
+    "REPLACE: https://facebook.com/org"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "REPLACE: +1-555-123-4567",
+    "contactType": "customer service",
+    "email": "REPLACE: support@example.com",
+    "availableLanguage": ["English"]
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "REPLACE: 123 Main Street",
+    "addressLocality": "REPLACE: City",
+    "addressRegion": "REPLACE: State",
+    "postalCode": "REPLACE: 12345",
+    "addressCountry": "REPLACE: US"
+  }
+}

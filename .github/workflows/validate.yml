@@ -1,0 +1,59 @@
+name: Validate Plugins
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON files
+        run: |
+          echo "Validating marketplace.json..."
+          python3 -c "import json, sys; json.load(open('.claude-plugin/marketplace.json'))" \
+            && echo "  marketplace.json OK"
+
+          echo "Validating plugin.json files..."
+          for f in plugins/*/.claude-plugin/plugin.json; do
+            python3 -c "import json, sys; json.load(open('$f'))" \
+              && echo "  $f OK"
+          done
+
+      - name: Check required plugin structure
+        run: |
+          echo "Checking plugin structure..."
+          errors=0
+          for plugin_dir in plugins/*/; do
+            name=$(basename "$plugin_dir")
+
+            if [ ! -f "$plugin_dir/.claude-plugin/plugin.json" ]; then
+              echo "ERROR: $name missing .claude-plugin/plugin.json"
+              errors=$((errors + 1))
+            fi
+
+            if [ ! -d "$plugin_dir/skills" ] && [ ! -d "$plugin_dir/commands" ] && [ ! -d "$plugin_dir/agents" ]; then
+              echo "WARNING: $name has no skills/, commands/, or agents/"
+            fi
+          done
+
+          if [ $errors -gt 0 ]; then
+            echo "$errors error(s) found"
+            exit 1
+          fi
+          echo "All plugins valid"
+
+      - name: Check SKILL.md files have frontmatter
+        run: |
+          echo "Checking SKILL.md frontmatter..."
+          for skill_file in plugins/*/skills/*/SKILL.md; do
+            first_line=$(head -1 "$skill_file")
+            if [ "$first_line" != "---" ]; then
+              echo "WARNING: $skill_file missing frontmatter (---)"
+            fi
+          done
+          echo "Frontmatter check complete"

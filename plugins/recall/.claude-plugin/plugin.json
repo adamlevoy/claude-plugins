@@ -1,0 +1,13 @@
+{
+  "name": "recall",
+  "description": "Load context from vault memory. Temporal queries use native JSONL timeline. Topic queries use QMD BM25 search. Generates session-file relationship graphs.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Adam Levoy",
+    "email": "ajlevoy@gmail.com"
+  },
+  "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/recall",
+  "repository": "https://github.com/adamlevoy/claude-plugins",
+  "license": "MIT",
+  "keywords": ["recall", "memory", "obsidian", "context", "vault", "search"]
+}

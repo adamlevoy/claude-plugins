@@ -1,0 +1,170 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "adamlevoy",
+  "description": "Personal Claude Code plugin marketplace — skills, agents, and integrations built by Adam Levoy.",
+  "version": "1.0.0",
+  "homepage": "https://adamlevoy.com",
+  "repository": "https://github.com/adamlevoy/claude-plugins",
+  "license": "MIT",
+  "owner": {
+    "name": "Adam Levoy",
+    "email": "ahoy@adamlevoy.com",
+    "url": "https://adamlevoy.com"
+  },
+  "plugins": [
+    {
+      "name": "granola",
+      "source": "./plugins/granola",
+      "description": "Sync Granola meeting notes and transcripts to Obsidian vault.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/granola",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["granola", "meetings", "obsidian", "notes", "transcripts"]
+    },
+    {
+      "name": "firecrawl",
+      "source": "./plugins/firecrawl",
+      "description": "Web scraping and crawling via Firecrawl API for building knowledge bases and extracting structured data.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/firecrawl",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["firecrawl", "scraping", "crawling", "web-data", "knowledge-base"]
+    },
+    {
+      "name": "seo",
+      "source": "./plugins/seo",
+      "description": "Comprehensive SEO and GEO (Generative Engine Optimization) using DataForSEO API.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/seo",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["seo", "geo", "dataforseo", "keyword-research", "content-strategy"]
+    },
+    {
+      "name": "cloudflare",
+      "source": "./plugins/cloudflare",
+      "description": "Cloudflare API for domain and DNS management.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/cloudflare",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["cloudflare", "dns", "domains", "cdn", "infrastructure"]
+    },
+    {
+      "name": "reddit",
+      "source": "./plugins/reddit",
+      "description": "Reddit API integration via PRAW — browse, post, monitor, and analyze Reddit content.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/reddit",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["reddit", "praw", "social-media", "community", "monitoring"]
+    },
+    {
+      "name": "recall",
+      "source": "./plugins/recall",
+      "description": "Load context from vault memory using temporal queries and BM25 search.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/recall",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["recall", "memory", "obsidian", "context", "vault"]
+    },
+    {
+      "name": "skill-creator",
+      "source": "./plugins/skill-creator",
+      "description": "Guide for creating effective Claude Code skills with workflows, tools, and integrations.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/skill-creator",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["skill-creator", "plugin-dev", "authoring", "templates"]
+    },
+    {
+      "name": "web-design-guidelines",
+      "source": "./plugins/web-design-guidelines",
+      "description": "Review UI code for Web Interface Guidelines compliance — accessibility, UX, and design best practices.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/web-design-guidelines",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["ui", "accessibility", "design", "guidelines", "review"]
+    },
+    {
+      "name": "frontend-design",
+      "source": "./plugins/frontend-design",
+      "description": "Create distinctive, production-grade frontend interfaces with high design quality.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/frontend-design",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["frontend", "design", "ui", "components", "react", "html"]
+    },
+    {
+      "name": "raycast",
+      "source": "./plugins/raycast",
+      "description": "Generate Raycast script commands for macOS automation and productivity workflows.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/raycast",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["raycast", "macos", "automation", "scripts", "productivity"]
+    },
+    {
+      "name": "trader",
+      "source": "./plugins/trader",
+      "description": "Swing trading analysis for equities and crypto — setups, positions, journaling, and research.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/trader",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["trading", "stocks", "crypto", "analysis", "journal"]
+    },
+    {
+      "name": "sync-claude-sessions",
+      "source": "./plugins/sync-claude-sessions",
+      "description": "Sync Claude Code sessions to Obsidian markdown — export, resume, annotate, and archive sessions.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/sync-claude-sessions",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["claude-code", "sessions", "obsidian", "export", "notes"]
+    },
+    {
+      "name": "media-ingest",
+      "source": "./plugins/media-ingest",
+      "description": "Ingest YouTube videos, podcast episodes, and Granola meeting transcripts as Obsidian markdown notes.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/media-ingest",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["youtube", "podcast", "transcripts", "obsidian", "media"]
+    },
+    {
+      "name": "image-gen",
+      "source": "./plugins/image-gen",
+      "description": "Generate and edit images via Google Nano Banana 2 (Gemini) and Imagen 4 — text-to-image, photo editing, style transfer.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/image-gen",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["image-generation", "gemini", "imagen", "ai-art", "photo-editing"]
+    }
+  ]
+}

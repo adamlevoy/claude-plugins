@@ -1,0 +1,30 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "REPLACE: What is the first question?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "REPLACE: The answer to the first question."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "REPLACE: What is the second question?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "REPLACE: The answer to the second question."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "REPLACE: What is the third question?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "REPLACE: The answer to the third question."
+      }
+    }
+  ]
+}

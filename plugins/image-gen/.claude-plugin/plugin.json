@@ -1,0 +1,13 @@
+{
+  "name": "image-gen",
+  "description": "Generate and edit images using Google's Nano Banana 2 (Gemini) and Imagen 4. Supports text-to-image, photo editing, background removal, style transfer, and reference-based generation.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Adam Levoy",
+    "email": "ajlevoy@gmail.com"
+  },
+  "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/image-gen",
+  "repository": "https://github.com/adamlevoy/claude-plugins",
+  "license": "MIT",
+  "keywords": ["image-generation", "gemini", "imagen", "ai-art", "photo-editing", "style-transfer"]
+}

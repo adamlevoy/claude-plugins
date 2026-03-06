@@ -1,0 +1,13 @@
+{
+  "name": "media-ingest",
+  "description": "Ingest YouTube videos, podcast episodes, and Granola meeting transcripts as Obsidian markdown notes. Pull transcripts and convert media to structured notes.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Adam Levoy",
+    "email": "ajlevoy@gmail.com"
+  },
+  "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/media-ingest",
+  "repository": "https://github.com/adamlevoy/claude-plugins",
+  "license": "MIT",
+  "keywords": ["youtube", "podcast", "transcripts", "obsidian", "media", "ingest"]
+}

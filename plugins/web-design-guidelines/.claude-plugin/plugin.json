@@ -1,0 +1,13 @@
+{
+  "name": "web-design-guidelines",
+  "description": "Review UI code for Web Interface Guidelines compliance. Audits accessibility, UX patterns, responsive design, and design best practices.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Adam Levoy",
+    "email": "ajlevoy@gmail.com"
+  },
+  "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/web-design-guidelines",
+  "repository": "https://github.com/adamlevoy/claude-plugins",
+  "license": "MIT",
+  "keywords": ["ui", "accessibility", "design", "guidelines", "review", "wcag"]
+}
