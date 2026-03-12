@@ -32,14 +32,12 @@ Or install a specific plugin directly:
 | [cloudflare](plugins/cloudflare/) | Cloudflare domain, DNS, and CDN management |
 | [reddit](plugins/reddit/) | Reddit API integration via PRAW |
 | [recall](plugins/recall/) | Load context from Obsidian vault memory |
-| [skill-creator](plugins/skill-creator/) | Guide for creating Claude Code skills |
-| [web-design-guidelines](plugins/web-design-guidelines/) | UI review for accessibility and design best practices |
-| [frontend-design](plugins/frontend-design/) | Production-grade frontend interfaces with high design quality |
 | [raycast](plugins/raycast/) | Generate Raycast script commands for macOS automation |
 | [trader](plugins/trader/) | Swing trading analysis for equities and crypto |
 | [sync-claude-sessions](plugins/sync-claude-sessions/) | Sync Claude Code sessions to Obsidian markdown |
 | [media-ingest](plugins/media-ingest/) | Ingest YouTube, podcast, and Granola content as Obsidian notes |
 | [image-gen](plugins/image-gen/) | Generate and edit images via Google Nano Banana 2 (Gemini) and Imagen 4 |
+| [cf-mcp](plugins/cf-mcp/) | Scaffold and deploy MCP servers on Cloudflare Workers with Google OAuth |
 
 ---
 
@@ -70,8 +68,3 @@ plugins/<name>/
 └── README.md
 ```
 
----
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).

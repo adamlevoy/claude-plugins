@@ -79,39 +79,6 @@
       "keywords": ["recall", "memory", "obsidian", "context", "vault"]
     },
     {
-      "name": "skill-creator",
-      "source": "./plugins/skill-creator",
-      "description": "Guide for creating effective Claude Code skills with workflows, tools, and integrations.",
-      "version": "1.0.0",
-      "author": { "name": "Adam Levoy" },
-      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/skill-creator",
-      "repository": "https://github.com/adamlevoy/claude-plugins",
-      "license": "MIT",
-      "keywords": ["skill-creator", "plugin-dev", "authoring", "templates"]
-    },
-    {
-      "name": "web-design-guidelines",
-      "source": "./plugins/web-design-guidelines",
-      "description": "Review UI code for Web Interface Guidelines compliance — accessibility, UX, and design best practices.",
-      "version": "1.0.0",
-      "author": { "name": "Adam Levoy" },
-      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/web-design-guidelines",
-      "repository": "https://github.com/adamlevoy/claude-plugins",
-      "license": "MIT",
-      "keywords": ["ui", "accessibility", "design", "guidelines", "review"]
-    },
-    {
-      "name": "frontend-design",
-      "source": "./plugins/frontend-design",
-      "description": "Create distinctive, production-grade frontend interfaces with high design quality.",
-      "version": "1.0.0",
-      "author": { "name": "Adam Levoy" },
-      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/frontend-design",
-      "repository": "https://github.com/adamlevoy/claude-plugins",
-      "license": "MIT",
-      "keywords": ["frontend", "design", "ui", "components", "react", "html"]
-    },
-    {
       "name": "raycast",
       "source": "./plugins/raycast",
       "description": "Generate Raycast script commands for macOS automation and productivity workflows.",
@@ -165,6 +132,17 @@
       "repository": "https://github.com/adamlevoy/claude-plugins",
       "license": "MIT",
       "keywords": ["image-generation", "gemini", "imagen", "ai-art", "photo-editing"]
+    },
+    {
+      "name": "cf-mcp",
+      "source": "./plugins/cf-mcp",
+      "description": "Scaffold and deploy custom MCP servers on Cloudflare Workers with Google OAuth, Durable Objects, and standard boilerplate.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/cf-mcp",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["mcp", "cloudflare", "workers", "oauth", "scaffold"]
     }
   ]
 }
