@@ -1,0 +1,11 @@
+{
+  "name": "cf-mcp",
+  "version": "1.0.0",
+  "description": "Scaffold and deploy custom MCP servers on Cloudflare Workers with Google OAuth.",
+  "skills": [
+    {
+      "name": "cf-mcp",
+      "path": "skills/cf-mcp/SKILL.md"
+    }
+  ]
+}

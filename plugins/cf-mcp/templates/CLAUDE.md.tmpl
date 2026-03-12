@@ -1,0 +1,90 @@
+# CLAUDE.md
+
+## Overview
+
+{{DESCRIPTION}}
+
+Authenticated via Google SSO OAuth 2.1 — only `@{{GOOGLE_WORKSPACE_DOMAIN}}` Workspace accounts can connect (enforced by Google's "Internal" consent screen).
+
+## Commands
+
+```bash
+# Development
+bun run dev          # Start local dev server (wrangler dev)
+
+# Deployment
+bun run deploy       # Deploy to Cloudflare Workers
+
+# Logs
+bun run logs         # Stream live logs (wrangler tail --format pretty)
+bun run tail         # Raw tail output
+
+# Secrets
+bun run secrets      # List configured secrets
+wrangler secret put SECRET_NAME  # Set a secret
+
+# KV namespace (one-time setup)
+wrangler kv namespace create "OAUTH_KV"  # Paste ID into wrangler.toml
+```
+
+## Required Secrets
+
+Set via `wrangler secret put`:
+- `{{SERVICE_NAME_UPPER}}_API_KEY` — API key for the service
+- `GOOGLE_CLIENT_ID` — Google OAuth 2.0 client ID (from Google Cloud Console)
+- `GOOGLE_CLIENT_SECRET` — Google OAuth 2.0 client secret
+- `COOKIE_ENCRYPTION_KEY` — generate with `openssl rand -hex 32`
+
+## Architecture
+
+OAuth-protected MCP server using Cloudflare Workers with Durable Objects.
+
+```
+Claude Desktop → /mcp → OAuthProvider returns 401
+  → Claude opens browser → /authorize → approval dialog → Google sign-in
+  → /callback → completes OAuth → Claude stores token
+  → /mcp requests now authenticated
+```
+
+### Key Files
+
+| File | Purpose |
+|------|---------|
+| `src/index.ts` | `{{SERVICE_NAME_CLASS}}MCP` McpAgent class (Durable Object) + OAuthProvider config |
+| `src/google-handler.ts` | Hono app handling Google OAuth flow (/authorize, /callback) |
+| `src/utils.ts` | Google OAuth helpers (authorize URL, token exchange, types) |
+| `src/workers-oauth-utils.ts` | CSRF/state management, approval dialog (from Cloudflare reference) |
+
+### Tool Pattern
+
+All tools follow the same pattern:
+1. Registered in `{{SERVICE_NAME_CLASS}}MCP.init()` via `this.server.registerTool()` with Zod input schemas
+2. Structured logging: `console.log(JSON.stringify({ tool, ...params, timestamp }))`
+3. Call `client.request<T>(endpoint)` for authenticated API access
+4. Truncate large responses with `truncateResponse()`
+
+### Tools
+
+| Tool | Description |
+|------|-------------|
+| `{{SERVICE_NAME}}_example_tool` | TODO: List your tools here |
+
+## Configuration
+
+### Claude Desktop / Claude Code
+
+Add in Settings > Connectors > Add custom connector:
+- URL: `https://{{SERVICE_NAME}}-mcp.{{DOMAIN}}/mcp`
+- Click Connect → approve → sign in with Google
+
+### Google Cloud Console Setup
+
+1. Go to `console.cloud.google.com`
+2. Create/select project
+3. APIs & Services > OAuth consent screen → User Type: **Internal**
+4. APIs & Services > Credentials → Create OAuth 2.0 Client ID (Web application)
+5. Authorized redirect URI: `https://{{SERVICE_NAME}}-mcp.{{DOMAIN}}/callback`
+
+## Repository
+
+- Production URL: `{{SERVICE_NAME}}-mcp.{{DOMAIN}}`

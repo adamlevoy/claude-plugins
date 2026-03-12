@@ -1,0 +1,35 @@
+name = "{{SERVICE_NAME}}-mcp"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+account_id = "{{ACCOUNT_ID}}"
+
+# Keep workers.dev URL active as backup
+workers_dev = true
+
+# Custom domain (auto-provisions DNS record)
+routes = [
+  { pattern = "{{SERVICE_NAME}}-mcp.{{DOMAIN}}", custom_domain = true }
+]
+
+# Durable Object for authenticated MCP sessions
+[durable_objects]
+bindings = [
+  { name = "MCP_OBJECT", class_name = "{{SERVICE_NAME_CLASS}}MCP" }
+]
+
+# KV namespace for OAuth state storage
+[[kv_namespaces]]
+binding = "OAUTH_KV"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+# DO migration
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["{{SERVICE_NAME_CLASS}}MCP"]
+
+# Secrets (set via `wrangler secret put`):
+# - {{SERVICE_NAME_UPPER}}_API_KEY    — Service API key
+# - GOOGLE_CLIENT_ID                  — Google OAuth client ID
+# - GOOGLE_CLIENT_SECRET              — Google OAuth client secret
+# - COOKIE_ENCRYPTION_KEY             — generate: openssl rand -hex 32

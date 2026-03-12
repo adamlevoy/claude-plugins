@@ -1,0 +1,136 @@
+import OAuthProvider from '@cloudflare/workers-oauth-provider';
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { McpAgent } from 'agents/mcp';
+import { z } from 'zod';
+import { GoogleHandler } from './google-handler';
+import type { Props } from './utils';
+
+interface Env {
+  {{SERVICE_NAME_UPPER}}_API_KEY: string;
+  GOOGLE_CLIENT_ID: string;
+  GOOGLE_CLIENT_SECRET: string;
+  COOKIE_ENCRYPTION_KEY: string;
+  MCP_OBJECT: DurableObjectNamespace;
+  OAUTH_KV: KVNamespace;
+}
+
+// Constants
+const API_BASE_URL = 'https://api.example.com'; // TODO: Replace with actual API base URL
+const CHARACTER_LIMIT = 25_000;
+
+// Response truncation
+function truncateResponse(data: unknown): string {
+  const json = JSON.stringify(data, null, 2);
+  if (json.length <= CHARACTER_LIMIT) return json;
+  if (Array.isArray(data)) {
+    const half = Math.ceil(data.length / 2);
+    return JSON.stringify({
+      items: data.slice(0, half),
+      truncated: true,
+      truncation_message: `Response truncated from ${data.length} to ${half} items. Use filters to narrow results.`,
+    }, null, 2);
+  }
+  return json.slice(0, CHARACTER_LIMIT) + '\n... [truncated]';
+}
+
+// API client
+class {{SERVICE_NAME_CLASS}}Client {
+  private apiKey: string;
+
+  constructor(apiKey: string) {
+    this.apiKey = apiKey;
+  }
+
+  async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+    const url = `${API_BASE_URL}${endpoint}`;
+
+    const response = await fetch(url, {
+      ...options,
+      headers: {
+        'Authorization': `Bearer ${this.apiKey}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        ...options.headers,
+      },
+    });
+
+    if (!response.ok) {
+      const body = await response.text();
+      switch (response.status) {
+        case 401:
+          throw new Error('Error: Authentication failed. Check your API key is valid.');
+        case 403:
+          throw new Error('Error: Permission denied. Your API key may not have access to this resource.');
+        case 404:
+          throw new Error('Error: Resource not found.');
+        case 429:
+          throw new Error('Error: Rate limit exceeded. Please wait before making more requests.');
+        default:
+          throw new Error(`Error: API returned ${response.status} - ${body}`);
+      }
+    }
+
+    return response.json() as Promise<T>;
+  }
+}
+
+// Tool annotations — adjust per tool as needed
+const READ_ONLY_ANNOTATIONS = {
+  readOnlyHint: true,
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: true,
+} as const;
+
+// ============================================================================
+// MCP Agent (Durable Object)
+// ============================================================================
+
+export class {{SERVICE_NAME_CLASS}}MCP extends McpAgent<Env, Record<string, never>, Props> {
+  server = new McpServer({
+    name: '{{SERVICE_NAME}}-mcp',
+    version: '1.0.0',
+  });
+
+  async init() {
+    const client = new {{SERVICE_NAME_CLASS}}Client(this.env.{{SERVICE_NAME_UPPER}}_API_KEY);
+
+    // ── Example Tool ──
+    // TODO: Replace with actual tools for the target API
+
+    this.server.registerTool('{{SERVICE_NAME}}_example_tool', {
+      title: 'Example Tool',
+      description: 'TODO: Describe what this tool does.',
+      inputSchema: {
+        query: z.string().min(1).describe('Search query'),
+      },
+      annotations: READ_ONLY_ANNOTATIONS,
+    }, async ({ query }) => {
+      try {
+        console.log(JSON.stringify({ tool: '{{SERVICE_NAME}}_example_tool', query, timestamp: new Date().toISOString() }));
+        const data = await client.request<unknown>(`/example?q=${encodeURIComponent(query)}`);
+        return {
+          content: [{ type: 'text' as const, text: truncateResponse(data) }],
+        };
+      } catch (error) {
+        return {
+          isError: true,
+          content: [{ type: 'text' as const, text: error instanceof Error ? error.message : String(error) }],
+        };
+      }
+    });
+  }
+}
+
+// ============================================================================
+// Worker Entrypoint — OAuthProvider wraps everything
+// ============================================================================
+
+export default new OAuthProvider({
+  apiHandler: {{SERVICE_NAME_CLASS}}MCP.serve('/mcp'),
+  apiRoute: '/mcp',
+  authorizeEndpoint: '/authorize',
+  clientRegistrationEndpoint: '/register',
+  defaultHandler: GoogleHandler as any,
+  tokenEndpoint: '/token',
+});

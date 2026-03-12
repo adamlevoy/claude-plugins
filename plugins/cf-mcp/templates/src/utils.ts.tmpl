@@ -1,0 +1,79 @@
+/**
+ * Google OAuth helpers for the {{SERVICE_NAME}} MCP server.
+ * Adapted from the GitHub OAuth reference (cloudflare/ai/demos/remote-mcp-github-oauth/src/utils.ts)
+ * with Google-specific differences: JSON token response, userinfo endpoint, hd domain hint.
+ */
+
+export type GoogleUserInfo = {
+  email: string;
+  name: string;
+  picture: string;
+};
+
+// Props stored in the OAuth token and available as this.props in the McpAgent
+export type Props = {
+  email: string;
+  name: string;
+  picture: string;
+};
+
+/**
+ * Builds the Google OAuth authorization URL.
+ * Includes `hd` param to hint the Workspace domain for cleaner UX.
+ * If not using Google Workspace, remove the `hd` line entirely.
+ */
+export function getGoogleAuthorizeUrl(options: {
+  client_id: string;
+  redirect_uri: string;
+  scope: string;
+  state?: string;
+}): string {
+  const url = new URL('https://accounts.google.com/o/oauth2/v2/auth');
+  url.searchParams.set('client_id', options.client_id);
+  url.searchParams.set('redirect_uri', options.redirect_uri);
+  url.searchParams.set('scope', options.scope);
+  url.searchParams.set('response_type', 'code');
+  url.searchParams.set('access_type', 'online');
+  url.searchParams.set('hd', '{{GOOGLE_WORKSPACE_DOMAIN}}');
+  if (options.state) url.searchParams.set('state', options.state);
+  return url.href;
+}
+
+/**
+ * Exchanges an authorization code for a Google access token.
+ * Unlike GitHub (which returns form-encoded), Google returns JSON.
+ */
+export async function fetchGoogleToken(options: {
+  client_id: string;
+  client_secret: string;
+  code: string | undefined;
+  redirect_uri: string;
+}): Promise<[string, null] | [null, Response]> {
+  if (!options.code) {
+    return [null, new Response('Missing code', { status: 400 })];
+  }
+
+  const resp = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      client_id: options.client_id,
+      client_secret: options.client_secret,
+      code: options.code,
+      redirect_uri: options.redirect_uri,
+      grant_type: 'authorization_code',
+    }).toString(),
+  });
+
+  if (!resp.ok) {
+    console.log('Google token exchange failed:', await resp.text());
+    return [null, new Response('Failed to fetch access token from Google', { status: 500 })];
+  }
+
+  const body = await resp.json<{ access_token?: string }>();
+  if (!body.access_token) {
+    return [null, new Response('Missing access token in Google response', { status: 400 })];
+  }
+
+  return [body.access_token, null];
+}
