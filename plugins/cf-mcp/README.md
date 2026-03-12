@@ -2,9 +2,21 @@
 
 Scaffold and deploy custom MCP servers on Cloudflare Workers with Google OAuth.
 
+## Quick start
+
+Install the plugin in Claude Code:
+
+    /plugin install cf-mcp@adamlevoy-plugins
+
+Then ask Claude:
+
+> "Create a Cloudflare Workers MCP server for the Stripe API"
+
+The skill triggers when Cloudflare Workers is explicitly mentioned in the context of building an MCP server.
+
 ## Why this architecture
 
-Claude Desktop and Claude Code support remote MCP servers via the Connectors feature. Unlike local MCP servers that require each user to install dependencies and manage processes on their machine, a remote MCP server runs on Cloudflare Workers — your team members just authenticate and go. No local setup, no `npx`, no Docker containers.
+Claude Desktop, Claude.ai, and Claude Code all support remote MCP servers. Unlike local MCP servers that require each user to install dependencies and manage processes on their machine, a remote MCP server runs on Cloudflare Workers — your team members just authenticate and go. No local setup, no `npx`, no Docker containers.
 
 This architecture is designed for teams:
 
@@ -15,32 +27,33 @@ This architecture is designed for teams:
 
 ## Team distribution
 
-```mermaid
-flowchart LR
-    A[Admin deploys MCP server] --> B[Admin adds connector URL\nto org settings]
-    B --> C[Team members see\nconnector in Claude]
-    C --> D[Click Connect]
-    D --> E[Sign in with Google]
-    E --> F[Tools available\nin every conversation]
-```
-
 ### Admin setup (one time)
 
 1. Deploy the MCP server to Cloudflare Workers (this skill handles the full process)
-2. In **Claude Desktop** or the **Claude Admin Console**, add a custom connector to the organization:
+2. Add the connector to your organization via **Settings** → **Connectors** → **Add Custom Connector** (in Claude Desktop or Claude.ai):
    - URL: `https://<service>-mcp.<your-domain>/mcp`
-3. The connector is now visible to all organization members
+3. The connector is now available to all organization members across Claude Desktop, Claude.ai, and Claude Code
 
-### Team member experience
+### Team member experience — Claude Desktop
 
 1. Open **Claude Desktop** — the connector appears under available integrations
 2. Click **Connect** — a browser window opens with an approval dialog
 3. Click **Approve** — redirected to Google sign-in
 4. Sign in with your organization Google account — done
 
-The OAuth token is stored by Claude and refreshed automatically. Team members only authenticate once. No API keys, no configuration files, no terminal commands.
+### Team member experience — Claude Code
 
-Claude Code (CLI) works the same way — connectors added at the org level are available automatically.
+Org-level connectors are automatically available to Claude Code users logged into the same organization.
+
+To add a connector individually in the terminal:
+
+    claude mcp add --transport http <service>-mcp https://<service>-mcp.<your-domain>/mcp
+
+Then authenticate by running `/mcp` inside Claude Code, which opens the browser OAuth flow.
+
+### Authentication
+
+The OAuth token is stored by the client and refreshed automatically. Team members only authenticate once. No API keys, no configuration files, no terminal commands.
 
 ## How it works
 
@@ -122,15 +135,3 @@ The skill guides Claude through 4 phases:
 2. **Implement Tools** — research the target API, update the Env interface and API client, register tools with Zod schemas and annotations
 3. **Configure & Deploy** — create KV namespace, set secrets, configure Google Cloud Console OAuth, deploy to Cloudflare
 4. **Connect & Test** — add the MCP connector URL to your org, complete OAuth flow, verify each tool works
-
-## Usage
-
-Ask Claude:
-
-> "Create a Cloudflare Workers MCP server for the Stripe API"
-
-The skill triggers when Cloudflare Workers is explicitly mentioned in the context of building an MCP server.
-
-## Install
-
-    /plugin install cf-mcp@adamlevoy-plugins
