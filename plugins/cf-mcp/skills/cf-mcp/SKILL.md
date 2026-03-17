@@ -163,8 +163,8 @@ this.server.registerTool('{{SERVICE_NAME}}_list_items', {
   title: 'List Items',
   description: 'List all items with optional filtering. Returns item name, status, and metadata.',
   inputSchema: {
-    status: z.enum(['active', 'archived', 'all']).default('active').describe('Filter by status'),
-    limit: z.number().min(1).max(100).default(20).describe('Max results to return'),
+    status: z.string().optional().describe('Filter by status: active, archived, or all (default: active)'),
+    limit: z.string().optional().describe('Max results to return, 1-100 (default: 20)'),
   },
   annotations: {
     readOnlyHint: true,
@@ -180,7 +180,7 @@ this.server.registerTool('{{SERVICE_NAME}}_list_items', {
       limit,
       timestamp: new Date().toISOString(),
     }));
-    const data = await client.request<unknown>(`/items?status=${status}&limit=${limit}`);
+    const data = await client.request<unknown>(`/items?status=${status || 'active'}&limit=${limit || '20'}`);
     return {
       content: [{ type: 'text' as const, text: truncateResponse(data) }],
     };
@@ -198,10 +198,10 @@ this.server.registerTool('{{SERVICE_NAME}}_list_items', {
 ```typescript
 this.server.registerTool('{{SERVICE_NAME}}_create_item', {
   title: 'Create Item',
-  description: 'Create a new item with the given name and configuration.',
+  description: 'Create a new item with the given name and optional configuration as JSON.',
   inputSchema: {
     name: z.string().min(1).describe('Item name'),
-    config: z.object({ key: z.string() }).optional().describe('Optional configuration'),
+    config: z.string().optional().describe('Optional configuration as JSON string (e.g. {"key": "value"})'),
   },
   annotations: {
     readOnlyHint: false,
@@ -216,9 +216,10 @@ this.server.registerTool('{{SERVICE_NAME}}_create_item', {
       name,
       timestamp: new Date().toISOString(),
     }));
+    const parsedConfig = config ? JSON.parse(config) : undefined;
     const data = await client.request<unknown>('/items', {
       method: 'POST',
-      body: JSON.stringify({ name, config }),
+      body: JSON.stringify({ name, config: parsedConfig }),
     });
     return {
       content: [{ type: 'text' as const, text: truncateResponse(data) }],
@@ -235,11 +236,31 @@ this.server.registerTool('{{SERVICE_NAME}}_create_item', {
 ### 2.5 Tool Design Guidelines
 
 - **Descriptions**: Write for an LLM audience. State what the tool does, what it returns, and when to use it.
-- **Input schemas**: Use Zod with `.describe()` on every field. Add `.default()` where sensible.
+- **Input schemas**: Use Zod with `.describe()` on every field. Put validation constraints and defaults in the description text, not in Zod methods.
 - **Annotations**: Set `readOnlyHint`, `destructiveHint`, `idempotentHint`, `openWorldHint` accurately.
 - **Error handling**: Always wrap in try/catch, return `isError: true` with the error message.
 - **Logging**: Every tool call logs `{ tool, ...keyParams, timestamp }` via `console.log(JSON.stringify(...))`.
 - **Truncation**: Always wrap response data in `truncateResponse()` — the 25k character limit prevents oversized responses.
+
+### 2.6 Zod v4 inputSchema Constraints
+
+**CRITICAL**: With zod v4 (`^4.3.5`) and the `agents/mcp` McpAgent pattern, only these Zod types work reliably in `inputSchema`:
+
+- `z.string()` — works
+- `z.string().optional()` — works
+- `z.string().min(1)` — works
+- `z.string().describe('...')` — works
+
+**These types silently break tool registration** (tools won't appear in the connector):
+
+- `z.number()`, `z.number().min().max()` — use `z.string()` and parse in the handler
+- `z.enum([...])` — use `z.string()` and document valid values in `.describe()`
+- `z.array(z.string())` — use `z.string()` with comma-separated values
+- `z.record(z.unknown())` — use `z.string()` and accept JSON strings
+- `z.object({...})` — use `z.string()` and accept JSON strings
+- `z.boolean()` — use `z.string()` and parse `'true'`/`'false'`
+
+The failure is silent — `init()` completes, but the MCP connector shows "This connector has no tools available." with no errors in logs.
 
 ---
 
