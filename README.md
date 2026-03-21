@@ -17,7 +17,7 @@ Then browse and install:
 Or install a specific plugin directly:
 
 ```shell
-/plugin install kwatch@adamlevoy-plugins
+/plugin install seo@adamlevoy
 ```
 
 ---
