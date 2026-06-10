@@ -7,7 +7,7 @@ description: "Produce self-contained, interactive HTML files instead of markdown
 
 Markdown is for source-of-truth documents; HTML is for *reading and deciding*. A single self-contained HTML file carries richer information density (tables, SVG, color, layout), stays readable past 100 lines (tabs, navigation, collapsible sections), supports two-way interaction (sliders, toggles, copy-back buttons), and shares trivially — anyone can open it in a browser.
 
-Reference gallery: [anthropics/html-effectiveness](https://github.com/anthropics/html-effectiveness) — 20 self-contained examples. Article: [Using Claude Code: The Unreasonable Effectiveness of HTML](https://claude.com/blog/using-claude-code-the-unreasonable-effectiveness-of-html).
+Reference gallery: [anthropics/html-effectiveness](https://github.com/anthropics/html-effectiveness) — 20 self-contained examples, browsable live at [thariqs.github.io/html-effectiveness](https://thariqs.github.io/html-effectiveness/). Article: [Using Claude Code: The Unreasonable Effectiveness of HTML](https://claude.com/blog/using-claude-code-the-unreasonable-effectiveness-of-html).
 
 ## When to reach for HTML
 
