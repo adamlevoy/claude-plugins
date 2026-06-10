@@ -9,7 +9,7 @@ Spec-Driven Development for new projects, features, and ideas. Turns conversatio
 
 **Core principle:** Specifications focus on WHAT and WHY. Code is the last mile — maintaining software means evolving specifications.
 
-**Agent routing:** If an architecture-focused agent is available in your environment (e.g., an `Architect` subagent), route spec creation to it. Otherwise, do the work in the main session.
+**Agent routing:** Route spec creation to the **Architect** agent bundled with this plugin. If it isn't available, do the work in the main session.
 
 ## Workflow
 
