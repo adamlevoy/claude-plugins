@@ -38,6 +38,7 @@ Or install a specific plugin directly:
 | [media-ingest](plugins/media-ingest/) | Ingest YouTube, podcast, and Granola content as Obsidian notes |
 | [image-gen](plugins/image-gen/) | Generate and edit images via Google Nano Banana 2 (Gemini) and Imagen 4 |
 | [cf-mcp](plugins/cf-mcp/) | Scaffold and deploy MCP servers on Cloudflare Workers with Google OAuth |
+| [spec](plugins/spec/) | Spec-Driven Development with interactive HTML overviews (includes html-artifacts skill) |
 
 ---
 

@@ -143,6 +143,17 @@
       "repository": "https://github.com/adamlevoy/claude-plugins",
       "license": "MIT",
       "keywords": ["mcp", "cloudflare", "workers", "oauth", "scaffold"]
+    },
+    {
+      "name": "spec",
+      "source": "./plugins/spec",
+      "description": "Spec-Driven Development — turn ideas into spec.md, plan.md, tasks.md, progress.md, kickoff.md, and an interactive HTML overview. Bundles the html-artifacts skill for self-contained HTML outputs.",
+      "version": "1.0.0",
+      "author": { "name": "Adam Levoy" },
+      "homepage": "https://github.com/adamlevoy/claude-plugins/tree/main/plugins/spec",
+      "repository": "https://github.com/adamlevoy/claude-plugins",
+      "license": "MIT",
+      "keywords": ["spec", "spec-driven-development", "speckit", "planning", "html-artifacts"]
     }
   ]
 }
