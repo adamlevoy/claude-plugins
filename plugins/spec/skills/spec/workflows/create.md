@@ -1,6 +1,6 @@
 # Create Spec Workflow
 
-If an architecture-focused agent (e.g., `Architect`) is available, route this workflow to it. Otherwise, run it in the main session.
+Route this workflow to the **Architect** agent (bundled with this plugin). If it isn't available, run it in the main session.
 
 ## Output Location
 
