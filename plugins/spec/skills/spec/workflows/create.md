@@ -195,11 +195,17 @@ Initialized by the spec author, updated by whoever implements.
 [Anything worth capturing that doesn't fit above]
 ```
 
-### Phase 6: HTML Overview → `overview.html`
+### Phase 6: HTML Overview → `overview.html` (optional, on request)
 
-**This phase is required.** Generate a single self-contained HTML file that presents the entire spec as an interactive overview, using the **`html-artifacts`** skill (bundled in this plugin). This is the artifact stakeholders actually read — the markdown files are the source of truth for execution; the HTML overview is the source of truth for understanding.
+A single self-contained HTML file that presents the entire spec as an interactive overview, built with the **`html-artifacts`** skill (bundled in this plugin). The markdown files are the source of truth for execution; the HTML overview is the artifact for *reading and deciding*.
 
-Requirements for `overview.html`:
+**Generate it only when requested** — it's the most token-expensive artifact, and it derives entirely from the markdown artifacts, so deferring costs nothing:
+
+- **Upfront**: the user passed `--html` or said "with an HTML overview" (or similar) when starting the spec.
+- **Later**: the user asks any time after — "generate the HTML overview for `specs/<slug>`" reads the existing artifacts and builds it. Same path regenerates a stale overview after implementation changes.
+- **Otherwise**: skip it, and end the final summary with the offer: *"Want an interactive HTML overview of this spec? Just say so and I'll generate `overview.html`."*
+
+Requirements for `overview.html` when generated:
 
 1. **Self-contained** — one file, inline CSS and JS, no external dependencies, no build step. Opens directly in a browser.
 2. **Tabbed or sectioned navigation** covering: Problem & Goals, User Stories (with priority badges P1/P2/P3), Requirements (FR/NFR with MUST/SHOULD highlighting), Architecture (render the plan's structure as an inline SVG or styled diagram — do not embed unrendered mermaid), Key Decisions table, Task Board (phases as columns or grouped lists, checkpoints marked), and Risks.
@@ -207,7 +213,7 @@ Requirements for `overview.html`:
 4. **Export affordance** — a "Copy as Markdown" button on the user stories and tasks sections so content can be pasted back into prompts or issues.
 5. **Readable design** — system font stack, generous spacing, supports `prefers-color-scheme` dark mode. No placeholder lorem ipsum; every element is populated from the real spec artifacts.
 
-After writing the file, open it in the user's browser (e.g., `open specs/<feature-slug>/overview.html` on macOS) so they can review it immediately.
+After writing the file, open it in the user's browser (e.g., `open specs/<feature-slug>/overview.html` on macOS, `xdg-open` on Linux) so they can review it immediately.
 
 ### Phase 7: Kickoff Prompt → `kickoff.md`
 
@@ -257,7 +263,7 @@ Execute the spec at `specs/<feature-slug>/`. The artifacts are:
 - **Plan** (HOW): `specs/<feature-slug>/plan.md`
 - **Tasks** (execution order): `specs/<feature-slug>/tasks.md`
 - **Progress** (live tracking): `specs/<feature-slug>/progress.md`
-- **Overview** (HTML summary): `specs/<feature-slug>/overview.html`
+- [If generated:] **Overview** (HTML summary): `specs/<feature-slug>/overview.html`
 
 ## Agent orchestration
 
@@ -293,9 +299,10 @@ After writing `kickoff.md`, also output the prompt body (the section between the
 
 ## Output
 
-After creating all artifacts (spec, plan, tasks, progress, **overview.html**, **and kickoff**), present a summary:
+After creating all artifacts (spec, plan, tasks, progress, **and kickoff**), present a summary:
 - Number of user stories (by priority)
 - Number of tasks (with parallelizable count)
 - Key technical decisions
 - Skills routed for execution
-- Path to `overview.html` (opened in browser) and `kickoff.md`, with the kickoff prompt body ready to copy
+- Path to `kickoff.md` and the prompt body, ready to copy
+- If `overview.html` was generated, its path (opened in browser); otherwise close with: *"Want an interactive HTML overview of this spec? Just say so and I'll generate `overview.html`."*
