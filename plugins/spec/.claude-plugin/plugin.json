@@ -1,7 +1,7 @@
 {
   "name": "spec",
-  "description": "Spec-Driven Development: turn ideas into spec.md, plan.md, tasks.md, progress.md, kickoff.md, and an interactive HTML overview. Includes the html-artifacts skill and a bundled Architect agent.",
-  "version": "1.1.0",
+  "description": "Spec-Driven Development: turn ideas into spec.md, plan.md, tasks.md, progress.md, kickoff.md, and an optional interactive HTML overview. Includes the html-artifacts skill and a bundled Architect agent.",
+  "version": "1.2.0",
   "author": {
     "name": "Adam Levoy",
     "email": "ajlevoy@gmail.com"

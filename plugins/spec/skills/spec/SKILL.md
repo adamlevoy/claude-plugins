@@ -18,8 +18,10 @@ See [workflows/create.md](workflows/create.md) for the full process.
 ## Quick Reference
 
 ```
-/spec                     — Start a new spec (interactive)
-/spec "project idea"      — Start a spec with initial context
+/spec                            — Start a new spec (interactive)
+/spec "project idea"             — Start a spec with initial context
+/spec "project idea" --html      — Also generate the interactive HTML overview
+"generate the HTML overview"     — Build overview.html later from existing artifacts
 ```
 
 ## Artifact Location
@@ -55,12 +57,10 @@ For single-feature projects (the project IS the feature), use `specs/core/`.
 | `plan.md` | HOW — technical approach, architecture, dependencies, risks | Spec author |
 | `tasks.md` | Execution — dependency-ordered, parallelism-marked task list | Spec author |
 | `progress.md` | Tracking — living document updated as work proceeds | Implementer |
-| `overview.html` | Interactive single-file HTML overview of the entire spec | Spec author |
+| `overview.html` | Interactive single-file HTML overview of the spec (optional, on request) | Spec author |
 | `kickoff.md` | Self-contained execution prompt — paste into a fresh session to run the spec | Spec author |
 
 ## Completion Requirements
 
-Before ending the turn, two artifacts are **mandatory**:
-
-1. **`overview.html`** — a self-contained, interactive HTML overview of the spec, built with the `html-artifacts` skill. See [workflows/create.md](workflows/create.md) Phase 6. Open it in the browser when done so the user can review immediately.
-2. **`kickoff.md`** — a self-contained prompt that orchestrates the agents and skills needed to execute the spec. See [workflows/create.md](workflows/create.md) Phase 7 for the template. Output the prompt to the user as the final message so they can copy it directly.
+1. **Before ending the turn, always write `kickoff.md`** — a self-contained prompt that orchestrates the agents and skills needed to execute the spec. See [workflows/create.md](workflows/create.md) Phase 7 for the template. Output the prompt to the user as the final message so they can copy it directly.
+2. **Offer the HTML overview.** `overview.html` (Phase 6) is generated only when requested — upfront (`--html` / "with an HTML overview") or any time after, since it derives entirely from the markdown artifacts. If it wasn't requested, end the final summary with a one-line offer: *"Want an interactive HTML overview of this spec? Just say so and I'll generate `overview.html`."*

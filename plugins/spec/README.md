@@ -15,8 +15,10 @@ Inspired by [GitHub SpecKit](https://github.com/github/spec-kit) and [The Unreas
 ## Usage
 
 ```
-/spec                     — Start a new spec (interactive)
-/spec "project idea"      — Start a spec with initial context
+/spec                            — Start a new spec (interactive)
+/spec "project idea"             — Start a spec with initial context
+/spec "project idea" --html      — Also generate the interactive HTML overview
+"generate the HTML overview"     — Build overview.html later from existing artifacts
 ```
 
 Every spec produces, in `specs/<feature-slug>/`:
@@ -25,8 +27,10 @@ Every spec produces, in `specs/<feature-slug>/`:
 - **`plan.md`** — HOW: stack, architecture, key decisions with alternatives, risks
 - **`tasks.md`** — dependency-ordered checklist with parallelism markers and checkpoints
 - **`progress.md`** — living tracking doc for the implementer
-- **`overview.html`** — single-file interactive overview, opened in your browser
 - **`kickoff.md`** — a self-contained prompt to paste into a fresh session to execute the spec
+- **`overview.html`** *(on request)* — single-file interactive overview, opened in your browser
+
+The HTML overview is opt-in rather than automatic: it's the most token-expensive artifact, and since it derives entirely from the markdown files you can ask for it at any point — during the spec, right after, or once implementation has changed things and you want a fresh one. If you don't ask, the spec ends with a one-line offer so it stays discoverable.
 
 ## How I run this
 
