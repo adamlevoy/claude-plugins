@@ -68,6 +68,17 @@
       "keywords": ["reddit", "praw", "social-media", "community", "monitoring"]
     },
     {
+      "name": "hermes-tweet",
+      "source": "./plugins/hermes-tweet",
+      "description": "Native Hermes Agent X/Twitter plugin for Xquik automation with read-first workflows and approval-gated actions.",
+      "version": "0.1.6",
+      "author": { "name": "Xquik", "url": "https://github.com/Xquik-dev" },
+      "homepage": "https://github.com/Xquik-dev/hermes-tweet#readme",
+      "repository": "https://github.com/Xquik-dev/hermes-tweet",
+      "license": "MIT",
+      "keywords": ["hermes-agent", "hermes-plugin", "xquik", "twitter", "x", "social-media", "automation"]
+    },
+    {
       "name": "recall",
       "source": "./plugins/recall",
       "description": "Load context from vault memory using temporal queries and BM25 search.",
