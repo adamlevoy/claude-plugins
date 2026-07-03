@@ -1,0 +1,18 @@
+{
+  "name": "hermes-tweet",
+  "description": "Hermes Agent companion for discovering and installing Hermes Tweet, an X/Twitter plugin with exploration, read, and gated post actions through Xquik.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Xquik"
+  },
+  "homepage": "https://github.com/Xquik-dev/hermes-tweet",
+  "repository": "https://github.com/Xquik-dev/hermes-tweet",
+  "license": "MIT",
+  "keywords": [
+    "hermes-agent",
+    "x",
+    "twitter",
+    "social-media",
+    "xquik"
+  ]
+}
